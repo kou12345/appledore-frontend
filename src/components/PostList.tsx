@@ -5,12 +5,10 @@ import { PostCard } from "./PostCard";
 export const PostList = async () => {
   const posts = await getPosts();
   return (
-    <div className="grid grid-cols-6 gap-4  ">
-      <div className="col-start-2  col-span-4">
-        {posts.map((post, index) => {
-          return <PostCard key={index} post={post} />;
-        })}
-      </div>
+    <div className="col-start-2  col-span-4">
+      {posts.map((post, index) => {
+        return <PostCard key={index} post={post} />;
+      })}
     </div>
   );
 };
