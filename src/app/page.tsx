@@ -1,6 +1,5 @@
 "use server";
 
-import { Header } from "@/components/Header";
 import { PostList } from "@/components/PostList";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -9,8 +8,7 @@ import { Suspense } from "react";
 export default async function Home() {
   return (
     <div>
-      <Header />
-      <div className="grid grid-cols-6 gap-4  ">
+      <div className="grid grid-cols-6 gap-4">
         <Suspense fallback={<Loading />}>
           <PostList />
         </Suspense>

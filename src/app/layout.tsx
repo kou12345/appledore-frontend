@@ -1,3 +1,4 @@
+import { Header } from "@/components/Header";
 import { ThemeProvider } from "@/components/Theme-provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -20,6 +21,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
+
           {children}
         </ThemeProvider>
       </body>
