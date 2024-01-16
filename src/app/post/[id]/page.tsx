@@ -1,15 +1,22 @@
 "use server";
 
 import { TPost } from "@/components/PostList";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const post = await getPostById(params.id);
   return (
     <div className="grid grid-cols-6 gap-4">
       <div className="col-start-2  col-span-4">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          {post.title}
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+            {post.title}
+          </h1>
+          <Button className="">
+            <Link href={`/post/${post.id}/edit`}>Edit</Link>
+          </Button>
+        </div>
         <div className="mt-3">
           <p>
             <small className="text-sm font-medium leading-none">
