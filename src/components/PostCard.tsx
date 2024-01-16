@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { TPost } from "./PostList";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
 
@@ -11,7 +12,9 @@ export const PostCard = (props: Props) => {
   return (
     <Card className="my-5">
       <CardHeader>
-        <CardTitle>{post.title}</CardTitle>
+        <CardTitle>
+          <Link href={`/post/${post.id}`}>{post.title}</Link>
+        </CardTitle>
       </CardHeader>
       <CardContent>{<p>{post.content}</p>}</CardContent>
       <CardFooter>
