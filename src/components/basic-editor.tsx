@@ -17,6 +17,26 @@ import { createParagraphPlugin } from "@udecode/plate-paragraph";
 
 import { Editor } from "@/components/plate-ui/editor";
 import { createPlateUI } from "@/lib/plate/create-plate-ui";
+import { ELEMENT_BLOCKQUOTE } from "@udecode/plate-block-quote";
+import {
+  ELEMENT_CODE_BLOCK,
+  isCodeBlockEmpty,
+  isSelectionAtCodeBlockStart,
+  unwrapCodeBlock,
+} from "@udecode/plate-code-block";
+import { ELEMENT_PARAGRAPH } from "@udecode/plate-paragraph";
+import { createResetNodePlugin } from "@udecode/plate-reset-node";
+
+const resetBlockTypesCommonRule = {
+  types: [ELEMENT_BLOCKQUOTE],
+  defaultType: ELEMENT_PARAGRAPH,
+};
+
+const resetBlockTypesCodeBlockRule = {
+  types: [ELEMENT_CODE_BLOCK],
+  defaultType: ELEMENT_PARAGRAPH,
+  onReset: unwrapCodeBlock,
+};
 
 const plugins = createPlugins(
   [
@@ -35,6 +55,32 @@ const plugins = createPlugins(
       options: {
         rules: [...autoformatRules],
         enableUndoOnDelete: true,
+      },
+    }),
+    createResetNodePlugin({
+      options: {
+        rules: [
+          // {
+          //   ...resetBlockTypesCommonRule,
+          //   hotkey: "Enter",
+          //   predicate: isBlockAboveEmpty,
+          // },
+          // {
+          //   ...resetBlockTypesCommonRule,
+          //   hotkey: "Backspace",
+          //   predicate: isSelectionAtBlockStart,
+          // },
+          {
+            ...resetBlockTypesCodeBlockRule,
+            hotkey: "Enter",
+            predicate: isCodeBlockEmpty,
+          },
+          {
+            ...resetBlockTypesCodeBlockRule,
+            hotkey: "Backspace",
+            predicate: isSelectionAtCodeBlockStart,
+          },
+        ],
       },
     }),
   ],

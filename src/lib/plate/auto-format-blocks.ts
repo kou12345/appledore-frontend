@@ -11,6 +11,7 @@ import {
   ELEMENT_H6,
 } from "@udecode/plate-heading";
 import { ELEMENT_HR } from "@udecode/plate-horizontal-rule";
+import { ELEMENT_PARAGRAPH } from "@udecode/plate-paragraph";
 import { preFormat } from "./auto-format-utils";
 
 export const autoformatBlocks: AutoformatRule[] = [
@@ -67,6 +68,13 @@ export const autoformatBlocks: AutoformatRule[] = [
         defaultType: ELEMENT_DEFAULT,
         insertNodesOptions: { select: true },
       });
+
+      // コードブロックの後に新しい段落ノードを挿入
+      const paragraphNode = {
+        type: ELEMENT_PARAGRAPH,
+        children: [{ text: "" }],
+      };
+      insertNodes(editor, paragraphNode);
     },
   },
   {
